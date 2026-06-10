@@ -1,4 +1,29 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
+function AnimatedNumber({ target }) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    let start = 0
+    const duration = 2000
+    const increment = target / (duration / 16)
+
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= target) {
+        setCount(target)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(start))
+      }
+    }, 16)
+
+    return () => clearInterval(timer)
+  }, [target])
+
+  return <span>{count.toLocaleString()}</span>
+}
 
 function Accueil() {
   return (
@@ -14,29 +39,35 @@ function Accueil() {
         </p>
       </div>
 
-      {/* Chiffres clés */}
+      {/* Chiffres clés animés */}
       <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 px-6">
         <div className="bg-white rounded-xl shadow p-6 text-center">
-          <p className="text-4xl font-bold text-blue-900">3 000</p>
+          <p className="text-4xl font-bold text-blue-900">
+            <AnimatedNumber target={3000} />
+          </p>
           <p className="text-gray-600 mt-2">Hôpitaux en France</p>
         </div>
         <div className="bg-white rounded-xl shadow p-6 text-center">
-          <p className="text-4xl font-bold text-blue-900">67M</p>
+          <p className="text-4xl font-bold text-blue-900">
+            <AnimatedNumber target={67} />M
+          </p>
           <p className="text-gray-600 mt-2">Habitants</p>
         </div>
         <div className="bg-white rounded-xl shadow p-6 text-center">
-          <p className="text-4xl font-bold text-blue-900">8%</p>
+          <p className="text-4xl font-bold text-blue-900">
+            <AnimatedNumber target={8} />%
+          </p>
           <p className="text-gray-600 mt-2">Déserts médicaux</p>
         </div>
       </div>
 
-      {/* Section description */}
+      {/* Description */}
       <div className="max-w-4xl mx-auto mt-16 px-6 text-center">
         <h2 className="text-2xl font-bold text-blue-900 mb-4">
           Pourquoi ce site ?
         </h2>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          Les données de santé publique existent mais sont souvent complexes et inaccessibles. 
+          Les données de santé publique existent mais sont souvent complexes et inaccessibles.
           Ce site les rend compréhensibles par tous en quelques secondes.
         </p>
       </div>
