@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
+
+const COULEURS = [
+  "#1e3a8a", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd",
+  "#1d4ed8", "#1e40af", "#1e3a8a", "#172554", "#0369a1",
+  "#0284c7", "#0ea5e9", "#38bdf8", "#7dd3fc", "#bae6fd",
+  "#0c4a6e", "#075985", "#0369a1", "#0284c7", "#0ea5e9",
+  "#38bdf8"
+]
 
 function Hopitaux() {
   const [données, setDonnées] = useState([])
@@ -81,7 +89,11 @@ function Hopitaux() {
               <XAxis type="number" />
               <YAxis type="category" dataKey="type" width={200} tick={{ fontSize: 11 }} />
               <Tooltip />
-              <Bar dataKey="count" fill="#1e3a8a" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+                {données.map((entry, index) => (
+                    <Cell key={entry.type} fill={COULEURS[index % COULEURS.length]} />
+                ))}
+            </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>

@@ -40,7 +40,7 @@ function Accueil() {
       </div>
 
       {/* Chiffres clés animés */}
-      <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 px-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 px-6">
         <div className="bg-white rounded-xl shadow p-6 text-center">
           <p className="text-4xl font-bold text-blue-900">
             <AnimatedNumber target={3000} />
@@ -73,7 +73,7 @@ function Accueil() {
       </div>
 
       {/* Boutons navigation */}
-      <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 mb-16 px-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 mb-16 px-6">
         <Link to="/carte" className="bg-blue-900 text-white rounded-xl p-6 text-center hover:bg-blue-700">
           <p className="text-3xl mb-2">🗺️</p>
           <p className="font-bold text-lg">Carte</p>
